@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+input[type=button],input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=button],input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button],input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+
+
+
+
+
+
+
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <h1>A Fancy Table</h1>
+    
+    <table id="customers">
+      <thead>
+      <tr>
+        <th>User</th>
+        <th>Task Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Create Date</th>
+        <th>Complete Date</th>
+        <th>Status</th>
+        <th>Remove Task</th>
+      </tr>
+      </thead>
+      {% for single_data in all_tasks %}
+      <tbody id="tbody">
+      <tr>
+        <td>{{single_data.user.user_name}}</td>
+        <td>{{single_data.name}}</td>
+        <td>{{single_data.description}}</td>
+        <td>{{single_data.category}}</td>
+        <td>{{single_data.create_date}}</td>
+        {% if single_data.status %}
+        <td>{{single_data.complete_date}}</td>
+        <td><button disabled>Completed</button></td>
+        {% else %}
+        <td>N/A</td>
+        <td><button><a href="{% url 'complete_task' single_data.id %}">Complete Now</a></button></td>
+        {% endif %}
+
+
+        <td><button><a href="{% url 'delete_task' single_data.id %}">Delete</a></button></td>
+      </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+
+
+</body>
+</html>
